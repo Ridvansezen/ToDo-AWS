@@ -1,0 +1,7 @@
+myenv/
+
+todo/user/__pycache__/
+
+*.pyc
+
+todo/user/migrations
