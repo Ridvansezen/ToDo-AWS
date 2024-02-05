@@ -7,3 +7,7 @@ todo/user/__pycache__/
 todo/user/migrations
 
 todo/todo/__pycache__/
+
+todo/task/__pycache__/
+
+todo/task/migrations/
