@@ -9,6 +9,7 @@ from task.models import TodoTaskModel
 from rest_framework.generics import RetrieveUpdateDestroyAPIView
 from rest_framework.generics import DestroyAPIView
 from task.custom_login_required import IsAuthenticatedAndOwner
+from rest_framework.pagination import PageNumberPagination
 
 
 class TodoTaskCreateView(APIView):
@@ -31,10 +32,14 @@ class TodoTaskCreateView(APIView):
     
     
 class ListTaskView(APIView):
-    def get(self, request):  
-        tasks = TodoTaskModel.objects.all() 
-        serializer = TaskSerializer(tasks, many=True)
-        return Response(serializer.data)
+    def get(self, request):
+        paginator = PageNumberPagination()
+        tasks = TodoTaskModel.objects.all()
+        result_page = paginator.paginate_queryset(tasks, request)
+        
+        serializer = TaskSerializer(result_page, many=True)
+        
+        return paginator.get_paginated_response(serializer.data)
 
 
 class UpdateTaskView(RetrieveUpdateDestroyAPIView):
