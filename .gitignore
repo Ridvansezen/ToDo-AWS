@@ -5,3 +5,5 @@ todo/user/__pycache__/
 *.pyc
 
 todo/user/migrations
+
+todo/todo/__pycache__/
